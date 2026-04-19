@@ -1,0 +1,37 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Product Info</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>📦 Product Details</h2>
+
+      <p><b>Name:</b> <span th:text="${product.name}"></span></p>
+      <p><b>Category:</b> <span th:text="${product.category}"></span></p>
+      <p><b>Brand:</b> <span th:text="${product.brand}"></span></p>
+      <p>
+        <b>Description:</b> <span th:text="${product.description}"></span>
+      </p>
+      <p><b>Price:</b> <span th:text="${product.price}"></span></p>
+
+      <img
+        th:if="${product != null && product.imageFileName != null}"
+        th:src="@{/images/{img}(img=${product.imageFileName})}"
+      />
+
+      <p th:if="${product == null}">Product not found</p>
+      <br />
+      <a
+        th:if="${product != null}"
+        th:href="@{/computers_store/image/download/{id}(id=${product.id})}"
+        class="btn btn-down"
+        >⬇ download img
+      </a>
+
+      <br /><br />
+      <a th:href="@{/computers_store}" class="btn btn-back">⬅ Back</a>
+    </div>
+  </body>
+</html>

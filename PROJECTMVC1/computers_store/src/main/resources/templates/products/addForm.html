@@ -1,0 +1,60 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Add Product</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container">
+      <h2>➕ Add New Product</h2>
+
+      <form
+        th:action="@{/computers_store/product/save}"
+        th:object="${product}"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label>Name</label>
+        <input type="text" th:field="*{name}" required />
+
+        <div class="error" th:if="${#fields.hasErrors('name')}"
+             th:errors="*{name}"></div>
+
+        <label>Category</label>
+        <input type="text" th:field="*{category}" />
+
+        <div class="error" th:if="${#fields.hasErrors('category')}"
+             th:errors="*{category}"></div>
+
+        <label>Brand</label>
+        <input type="text" th:field="*{brand}" />
+
+        <div  class="error" th:if="${#fields.hasErrors('brand')}"
+             th:errors="*{brand}"></div>
+
+
+        <label>Description</label>
+        <textarea th:field="*{description}"></textarea>
+
+        <div class="error"  th:if="${#fields.hasErrors('description')}"
+             th:errors="*{description}"></div>
+
+        <label>Price</label>
+        <input type="number" th:field="*{price}" step="0.01" required />
+
+        <div class="error" th:if="${#fields.hasErrors('price')}"
+             th:errors="*{price}"></div>
+
+        <label>Upload Image</label>
+        <input type="file" name="imageFile" />
+
+        <div class="error" th:if="${#fields.hasErrors('imageFileName')}"
+             th:errors="*{imageFileName}"></div>
+
+        <br /><br />
+        <button type="submit" class="btn btn-add">Save</button>
+        <a th:href="@{/computers_store}" class="btn btn-back">Cancel</a>
+      </form>
+    </div>
+  </body>
+</html>

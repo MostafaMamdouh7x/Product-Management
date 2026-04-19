@@ -1,0 +1,67 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Products</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+
+  <h1 class ="welcome" th:text="#{messages.storename}">Welcome in Computer Store 🖥️</h1>
+    <div class="container">
+      <h2>🖥️ Products List</h2>
+
+      <a th:href="@{/computers_store/product/new}" class="btn btn-add"
+        >➕ Add Product</a
+      >
+
+      <table>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Category</th>
+          <th>Brand</th>
+          <th>Price</th>
+          <th>Image</th>
+          <th>Actions</th>
+        </tr>
+
+        <tr th:each="p : ${products}">
+          <td th:text="${p.id}"></td>
+          <td th:text="${p.name}"></td>
+          <td th:text="${p.category}"></td>
+          <td th:text="${p.brand}"></td>
+          <td th:text="${p.price}"></td>
+          <td>
+            <img
+              th:src="@{/images/{img}(img=${p.imageFileName})}"
+              alt="Product_Img"
+              width="100"
+            />
+          </td>
+          <td>
+            <a
+              th:href="@{/computers_store/product/{id}(id=${p.id})}"
+              class="btn btn-edit"
+              >View</a
+            >
+            <a
+              th:href="@{/computers_store/product/edit/{id}(id=${p.id})}"
+              class="btn btn-edit"
+              >Edit</a
+            >
+            <a
+              th:href="@{/computers_store/delete/{id}(id=${p.id})}"
+              class="btn btn-delete"
+              >Delete</a
+            >
+          </td>
+        </tr>
+      </table>
+      <br />
+      <br />
+      <a th:href="@{/computers_store/delete-all}" class="btn btn-del"
+        >❌ delete All</a
+      >
+    </div>
+  </body>
+</html>
